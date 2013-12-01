@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace Bitstamp.Net.Http.Formatting {
 	public class StringToDoubleConverter :JsonConverter{
@@ -15,7 +16,8 @@ namespace Bitstamp.Net.Http.Formatting {
 			{
 					var value = default(double);
 
-					if (double.TryParse((string)reader.Value, out value)){
+                    if (double.TryParse((string)reader.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out value))
+                    {
 						return value;
 					}
 
